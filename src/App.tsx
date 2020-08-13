@@ -1,8 +1,19 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+const TODOS_QUERY = gql`
+  query {
+    todos {
+      name
+    }
+  }
+`;
+
 const App = () => {
+  const { loading, data } = useQuery(TODOS_QUERY);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,14 +21,13 @@ const App = () => {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {loading ? (
+          <p>Loading ...</p>
+        ) : (
+          <ul>
+            {data && data.todos.map(({ name }, i) => <li key={i}>{name}</li>)}
+          </ul>
+        )}
       </header>
     </div>
   );
