@@ -11,8 +11,16 @@ const TODOS_QUERY = gql`
   }
 `;
 
+interface Todo {
+  name: string;
+}
+
+interface TodosData {
+  todos: Todo[];
+}
+
 const App = () => {
-  const { loading, data } = useQuery(TODOS_QUERY);
+  const { loading, data } = useQuery<TodosData>(TODOS_QUERY);
 
   return (
     <div className="App">
