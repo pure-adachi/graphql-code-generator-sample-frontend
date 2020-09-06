@@ -1,19 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { TodosQuery } from "./types.d";
-
-const TODOS_QUERY = gql`
-  query {
-    todos {
-      name
-    }
-  }
-`;
+import { useTodosQuery } from "./types.d";
 
 const App = () => {
-  const { loading, data } = useQuery<TodosQuery>(TODOS_QUERY);
+  const { loading, data } = useTodosQuery();
 
   return (
     <div className="App">

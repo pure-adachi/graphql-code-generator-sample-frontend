@@ -1,4 +1,4 @@
-# graphql-code-generator-sample-backend
+# graphql-code-generator-sample-frontend
 
 ## Quick Start
 
