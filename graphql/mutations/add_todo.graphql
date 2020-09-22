@@ -1,0 +1,13 @@
+mutation addTodo($name: String!) {
+  addTodo(input: { name: $name }) {
+    todo {
+      id
+      name
+      errors {
+        field
+        error
+      }
+    }
+    result
+  }
+}
