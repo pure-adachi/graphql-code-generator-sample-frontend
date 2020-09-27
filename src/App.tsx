@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { useTodosQuery, useAddTodoMutation } from "./types.d";
+import { useTodosQuery, useAddTodoMutation, useDelTodoMutation } from "./types.d";
 
 const App = () => {
   const { loading, data, refetch } = useTodosQuery();
@@ -18,6 +18,11 @@ const App = () => {
         });
       }
     },
+  });
+  const [delTodo] = useDelTodoMutation({
+    update() {
+      refetch();
+    }
   });
 
   return (
@@ -40,7 +45,7 @@ const App = () => {
           <p>Loading ...</p>
         ) : (
           <ul>
-            {data && data.todos.map(({ name }, i) => <li key={i}>{name}</li>)}
+            {data && data.todos.map(({ id,name }, i) => <li key={i}>{name}<button onClick={() => delTodo({ variables: { id } })}>削除</button></li>)}
           </ul>
         )}
       </header>
