@@ -2,6 +2,9 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -181,7 +184,8 @@ export type AddTodoMutationFn = Apollo.MutationFunction<AddTodoMutation, AddTodo
  * });
  */
 export function useAddTodoMutation(baseOptions?: Apollo.MutationHookOptions<AddTodoMutation, AddTodoMutationVariables>) {
-        return Apollo.useMutation<AddTodoMutation, AddTodoMutationVariables>(AddTodoDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddTodoMutation, AddTodoMutationVariables>(AddTodoDocument, options);
       }
 export type AddTodoMutationHookResult = ReturnType<typeof useAddTodoMutation>;
 export type AddTodoMutationResult = Apollo.MutationResult<AddTodoMutation>;
@@ -215,7 +219,8 @@ export type DelTodoMutationFn = Apollo.MutationFunction<DelTodoMutation, DelTodo
  * });
  */
 export function useDelTodoMutation(baseOptions?: Apollo.MutationHookOptions<DelTodoMutation, DelTodoMutationVariables>) {
-        return Apollo.useMutation<DelTodoMutation, DelTodoMutationVariables>(DelTodoDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DelTodoMutation, DelTodoMutationVariables>(DelTodoDocument, options);
       }
 export type DelTodoMutationHookResult = ReturnType<typeof useDelTodoMutation>;
 export type DelTodoMutationResult = Apollo.MutationResult<DelTodoMutation>;
@@ -245,10 +250,12 @@ export const TodosDocument = gql`
  * });
  */
 export function useTodosQuery(baseOptions?: Apollo.QueryHookOptions<TodosQuery, TodosQueryVariables>) {
-        return Apollo.useQuery<TodosQuery, TodosQueryVariables>(TodosDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TodosQuery, TodosQueryVariables>(TodosDocument, options);
       }
 export function useTodosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TodosQuery, TodosQueryVariables>) {
-          return Apollo.useLazyQuery<TodosQuery, TodosQueryVariables>(TodosDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TodosQuery, TodosQueryVariables>(TodosDocument, options);
         }
 export type TodosQueryHookResult = ReturnType<typeof useTodosQuery>;
 export type TodosLazyQueryHookResult = ReturnType<typeof useTodosLazyQuery>;
@@ -278,10 +285,12 @@ export const TodosIncludeIdDocument = gql`
  * });
  */
 export function useTodosIncludeIdQuery(baseOptions?: Apollo.QueryHookOptions<TodosIncludeIdQuery, TodosIncludeIdQueryVariables>) {
-        return Apollo.useQuery<TodosIncludeIdQuery, TodosIncludeIdQueryVariables>(TodosIncludeIdDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TodosIncludeIdQuery, TodosIncludeIdQueryVariables>(TodosIncludeIdDocument, options);
       }
 export function useTodosIncludeIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TodosIncludeIdQuery, TodosIncludeIdQueryVariables>) {
-          return Apollo.useLazyQuery<TodosIncludeIdQuery, TodosIncludeIdQueryVariables>(TodosIncludeIdDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TodosIncludeIdQuery, TodosIncludeIdQueryVariables>(TodosIncludeIdDocument, options);
         }
 export type TodosIncludeIdQueryHookResult = ReturnType<typeof useTodosIncludeIdQuery>;
 export type TodosIncludeIdLazyQueryHookResult = ReturnType<typeof useTodosIncludeIdLazyQuery>;
