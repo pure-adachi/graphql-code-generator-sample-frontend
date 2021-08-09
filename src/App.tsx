@@ -1,7 +1,9 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { useTodosQuery, useAddTodoMutation, useDelTodoMutation } from "./types.d";
+import {
+  useTodosQuery,
+  useAddTodoMutation,
+  useDelTodoMutation,
+} from "./types.d";
 
 const App = () => {
   const { loading, data, refetch } = useTodosQuery();
@@ -22,33 +24,38 @@ const App = () => {
   const [delTodo] = useDelTodoMutation({
     update() {
       refetch();
-    }
+    },
   });
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <input
-          type="text"
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              addTodo({ variables: { name: e.currentTarget.value } });
-              e.currentTarget.value = "";
-            }
-          }}
-        />
-        {loading ? (
-          <p>Loading ...</p>
-        ) : (
-          <ul>
-            {data && data.todos.map(({ id,name }, i) => <li key={i}>{name}<button onClick={() => delTodo({ variables: { id } })}>削除</button></li>)}
-          </ul>
-        )}
-      </header>
+      <p>
+        Edit <code>src/App.tsx</code> and save to reload.
+      </p>
+      <input
+        type="text"
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            addTodo({ variables: { name: e.currentTarget.value } });
+            e.currentTarget.value = "";
+          }
+        }}
+      />
+      {loading ? (
+        <p>Loading ...</p>
+      ) : (
+        <ul>
+          {data &&
+            data.todos.map(({ id, name }, i) => (
+              <li key={i}>
+                {name}
+                <button onClick={() => delTodo({ variables: { id } })}>
+                  削除
+                </button>
+              </li>
+            ))}
+        </ul>
+      )}
     </div>
   );
 };
